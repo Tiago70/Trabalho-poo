@@ -472,13 +472,21 @@ public class view extends JFrame {
 					consultaExibirNome.setText("Nome: " + consultado.getNome());
 					consultaExibirIdade.setText("Idade: " + consultado.getIdade());
 					consultaExibirMatricula.setText("Matricula: " + consultado.getMatricula());
+					consultaExibirMatricula.setVisible(true);
 					painelExibirInfo.setVisible(true);
 					btnEditar.setEnabled(true);
 					btnExcluir.setEnabled(true);
 				}
 			}
 		});
-		btnCancelarConsulta.addActionListener(e -> grupoPaineis.show(paineis, "Tela de Controle"));
+		btnCancelarConsulta.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				grupoPaineis.show(paineis, "Tela de Controle");
+				consultaExibirMatricula.setVisible(false);
+			}
+		});
 		
 		// Eventos da edição
 		btnEditar.addActionListener(new ActionListener() {
@@ -741,7 +749,6 @@ public class view extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("rodei vincular professor");
 				int indexCurso = controlador.consultarCurso(entradaVincularCurso.getText());
 				if (indexCurso >= 0) {
 					int indexProfessor = controlador.consultarProfessor(entradaVincularAouP.getText());
